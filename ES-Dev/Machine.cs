@@ -18,11 +18,20 @@ namespace ES_Dev
             itemsList = machineList;
         }
 
+        /// <summary>
+        /// Add the <c>amount</c> to the available machine credit.
+        /// </summary>
+        /// <param name="amount">The amount to be added to the credit balance.</param>
         public void Insert(double amount)
         {
             _credit += amount;
         }
 
+        /// <summary>
+        /// Selects an item from the items list based on the provided code.
+        /// </summary>
+        /// <param name="code">The code representing the selected item.</param>
+        /// <returns>A message indicating the result of the selection.</returns>
         public string Choose(string code)
         {
             string message = "";
@@ -46,16 +55,28 @@ namespace ES_Dev
             }
         }
 
+        /// <summary>
+        /// Retrieves the remaining credit balance and rounds it to two decimal places.
+        /// </summary>
+        /// <returns>The remaining credit balance rounded to two decimal places.</returns>
         public double GetChange()
         {
             return Math.Round(_credit, 2);
         }
 
+        /// <summary>
+        /// Retrieves the total balance and rounds it to two decimal places.
+        /// </summary>
+        /// <returns>The total balance rounded to two decimal places.</returns>
         public double GetBalance()
         {
             return Math.Round(_total, 2); ;
         }
 
+        /// <summary>
+        /// Updates the quantity of the selected item, adjusts the credit balance, and updates the total balance.
+        /// </summary>
+        /// <param name="item">The item to be updated.</param>
         private void UpdateList(Items item)
         {
             item.Quantity -= 1;
