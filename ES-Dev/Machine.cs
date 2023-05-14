@@ -12,10 +12,17 @@ namespace ES_Dev
 
         protected double _credit;
         protected double _total;
+        public int[] _sales = new int[24];
+
+        //TODO Implement a function called SetTime to let the test class mock the time
 
         public Machine(List<Items> machineList)
         {
             itemsList = machineList;
+            for (int i = 0; i < _sales.Length; i++)
+            {
+                _sales[i] = 0;
+            }
         }
 
         /// <summary>
@@ -79,6 +86,12 @@ namespace ES_Dev
         /// <param name="item">The item to be updated.</param>
         private void UpdateList(Items item)
         {
+            DateTime saleTime = DateTime.Now;
+
+            int currentSplit = saleTime.Hour % 24;
+
+            _sales[currentSplit] += 1;
+
             item.Quantity -= 1;
             _credit -= item.Price;
             _total += item.Price;

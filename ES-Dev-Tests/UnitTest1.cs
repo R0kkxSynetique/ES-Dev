@@ -91,5 +91,16 @@ namespace ES_Dev_Tests
             Assert.AreEqual(6.25, machine.GetChange());
             Assert.AreEqual(5.75, machine.GetBalance());
         }
+        public TestContext TestContext { get; set; }
+        [TestMethod]
+        public void Case8()
+        {
+            ItemList = new(new List<Items> { _smarlies, _carampar, _avril, _kokokola });
+            Machine machine = new(ItemList);
+
+            machine.Insert(1000.00);
+            machine.Choose("A01");
+            TestContext.WriteLine(string.Join(", ", machine._sales));
+        }
     }
 }
