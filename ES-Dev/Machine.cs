@@ -12,10 +12,18 @@ namespace ES_Dev
 
         protected double _credit;
         protected double _total;
+        public double[] _sales = new double[24];
+
+        protected internal bool _test;
+        protected internal DateTime _testDateTime;
 
         public Machine(List<Items> machineList)
         {
             itemsList = machineList;
+            for (int i = 0; i < _sales.Length; i++)
+            {
+                _sales[i] = 0;
+            }
         }
 
         /// <summary>
@@ -79,9 +87,31 @@ namespace ES_Dev
         /// <param name="item">The item to be updated.</param>
         private void UpdateList(Items item)
         {
+            DateTime saleTime;
+
+            if (_test)
+            {
+                saleTime = _testDateTime;
+                _test = false;
+            }
+            else
+            {
+                saleTime = DateTime.Now;
+            }
+
+            int currentSplit = saleTime.Hour % 24;
+
+            _sales[currentSplit] += item.Price;
+
             item.Quantity -= 1;
             _credit -= item.Price;
             _total += item.Price;
+        }
+
+        public void SetTime(string isoDateTime)
+        {
+            _test = true;
+            _testDateTime = DateTime.Parse(isoDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind);
         }
     }
 }
