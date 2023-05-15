@@ -89,13 +89,16 @@ namespace ES_Dev
         {
             DateTime saleTime;
 
+            // Check if the test mode is active
             if (_test)
             {
+                // Use the testDateTime value if in test mode
                 saleTime = _testDateTime;
                 _test = false;
             }
             else
             {
+                // Use the current system time if not in test mode
                 saleTime = DateTime.Now;
             }
 
@@ -108,6 +111,14 @@ namespace ES_Dev
             _total += item.Price;
         }
 
+        /// <summary>
+        /// Sets the time to a specific value for testing purposes only.
+        /// </summary>
+        /// <param name="isoDateTime">The ISO-formatted date and time string to set.</param>
+        /// <remarks>
+        /// This method should only be used for testing purposes to override the current time with a specific value.
+        /// It sets the internal flag to indicate that the test mode is active and assigns the provided time to be used.
+        /// </remarks>
         public void SetTime(string isoDateTime)
         {
             _test = true;
