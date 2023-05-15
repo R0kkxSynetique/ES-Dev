@@ -1,6 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ES_Dev;
 using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace ES_Dev_Tests
 {
@@ -99,8 +101,20 @@ namespace ES_Dev_Tests
             Machine machine = new(ItemList);
 
             machine.Insert(1000.00);
-            machine.Choose("A01");
-            TestContext.WriteLine(string.Join(", ", machine._sales));
+            machine.SetTime("2020-01-01T20:30:00"); machine.Choose("A01");
+            machine.SetTime("2020-03-01T23:30:00"); machine.Choose("A01");
+            machine.SetTime("2020-03-04T09:22:00"); machine.Choose("A01");
+            machine.SetTime("2020-04-01T23:00:00"); machine.Choose("A01");
+            machine.SetTime("2020-04-01T23:59:59"); machine.Choose("A01");
+            machine.SetTime("2020-04-04T09:12:00"); machine.Choose("A01");
+
+            var top3Sales = machine._sales.OrderByDescending(x => x).Take(3);
+
+            foreach (var sale in top3Sales)
+            {
+                int hour = Array.IndexOf(machine._sales, sale);
+                TestContext.WriteLine($"Hour {hour} generated a revenue of {sale.ToString("0.00")}");
+            }
         }
     }
 }
