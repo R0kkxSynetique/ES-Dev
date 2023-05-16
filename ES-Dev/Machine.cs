@@ -10,12 +10,12 @@ namespace ES_Dev
     {
         public List<Items> itemsList;
 
-        protected double _credit;
-        protected double _total;
+        private double _credit;
+        private double _total;
         public double[] _sales = new double[24];
 
-        protected internal bool _test;
-        protected internal DateTime _testDateTime;
+        private internal bool _test;
+        private internal DateTime _testDateTime;
 
         public Machine(List<Items> machineList)
         {
