@@ -4,10 +4,10 @@ namespace ES_Dev
 {
     public class Items
     {
-        protected string _name;
-        protected string _code;
-        protected int _quantity;
-        protected double _price;
+        private string _name;
+        private string _code;
+        private int _quantity;
+        private double _price;
 
         public string Name
         {
